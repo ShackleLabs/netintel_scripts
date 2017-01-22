@@ -73,7 +73,7 @@ if args.query_type == 'domain':
     url = 'https://pro.netintel.net/lookup.php'
 
     resp = requests.post(url, data={'domain': domain, 'apikey': API_KEY})
-    data = resp.json()
+    data = resp.json()['urls']
     report_name = data.get('report')[33:-12]
     print('Use this report name for future queries: {0}.'.format(report_name))
 
@@ -86,7 +86,7 @@ else:
     resp = requests.get(url)
 
     if resp.status_code == 200:
-        data = resp.json()
+        data = resp.json()['urls']
     else:
         print('Could not find report: {0}'.format(report))
         sys.exit(1)
